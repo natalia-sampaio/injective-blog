@@ -109,7 +109,7 @@ After defining our project constraints and evaluating the **top headless CMS opt
 
 -   Built-in support for **structured content, SEO metadata, and image optimization**.
 -   **Webhooks available**, allowing seamless content updates.
--   A wealth of **official documentation** makes it easy to learn and integrate.
+-   A wealth of **official documentation** makes it easy to learn, integrate and upgrade.
 
 ---
 
