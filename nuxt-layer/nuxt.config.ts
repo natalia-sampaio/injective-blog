@@ -3,4 +3,9 @@ export default defineNuxtConfig({
     compatibilityDate: "2024-11-01",
     devtools: { enabled: true },
     modules: ["@nuxtjs/sanity", "@nuxt/ui"],
+    css: ["~/assets/css/main.css"],
+    sanity: {
+        projectId: "l2fdudnh",
+        dataset: "production",
+    },
 });
