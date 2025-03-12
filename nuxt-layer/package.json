@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/ui": "^3.0.0",
     "@nuxtjs/sanity": "^1.13.3",
     "nuxt": "^3.16.0",
     "vue": "^3.5.13",
