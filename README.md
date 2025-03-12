@@ -5,9 +5,9 @@
 -   [Description](#description)
 -   [Tech Stack](#tech-stack)
 -   [Choosing a Headless CMS](#choosing-a-headless-cms)
-    -   [Defining Project Constraints](#defining-project-constraints)
-    -   [Compiling Data](#compiling-data)
-    -   [Conclusion](#conclusion)
+    1. [Defining Project Constraints](#defining-project-constraints)
+    2. [Compiling Data](#compiling-data)
+    3. [Conclusion](#conclusion)
 
 ## Description
 
@@ -37,7 +37,7 @@ Implement a mirror version of the [Injective Blog](https://blog.injective.com).
 
 When starting a new scalable project, selecting the right tools is crucial. In this case, choosing the best headless CMS is a key decision, but the market offers a vast array of options. For instance, [Jamstack site](https://jamstack.org) lists **126 different headless CMS solutions**.
 
-### Defining Project Constraints
+### 1. Defining Project Constraints
 
 Considering our tech stack—**Nuxt.js and Netlify with SSR enabled**—we can define specific constraints to guide our decision:
 
@@ -72,7 +72,7 @@ Considering our tech stack—**Nuxt.js and Netlify with SSR enabled**—we can d
     -   Deliver **structured content** (e.g., blog posts, categories).
     -   Support **image optimization** via a built-in API.
 
-### Compiling Data
+### 2. Compiling Data
 
 We identified the **top 5 headless CMS platforms** based on [G2's ratings](https://www.g2.com/categories/headless-cms), sorted by **number of reviews (most to least)**.  
 We also considered the **ease to use score** from [G2'S **Top 20 Easiest To Use Headless CMS Software**](https://www.g2.com/categories/headless-cms?rank=3&tab=easiest_to_use).
@@ -87,9 +87,9 @@ The table below presents these platforms, incorporating our defined constraints:
 | **Storyblok** | ✅ Built-in caching and CDN         | ✅ Yes              | ✅ Yes            | Nuxt.js module       | ✅ Yes   | ✅ Yes               | ✅ Yes             | ⭐ **4.5 / 5** (**458 reviews**)         | **8.9 (#1 place)**              |
 | **Prismic**   | ✅ Built-in caching and CDN         | ✅ Yes              | ✅ Yes            | Nuxt.js module       | ✅ Yes   | ✅ Yes               | ✅ Yes             | ⭐ **4.3 / 5** (**303 reviews**)         | **8.6 (#5 place)**              |
 
-### Conclusion
+### 3. Conclusion
 
-After defining our project constraints and evaluating the **top headless CMS options**, [Sanity](https://www.sanity.io/) emerges as the best choice.
+**After defining our project constraints and evaluating the top headless CMS options, [Sanity](https://www.sanity.io/) emerges as the best choice.**
 
 #### **Why Sanity?**
 
