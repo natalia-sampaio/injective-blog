@@ -31,5 +31,26 @@ export const postType = defineType({
       type: 'array',
       of: [{type: 'block'}],
     }),
+    defineField({
+      name: 'categories',
+      type: 'array',
+      of: [
+        {
+          type: 'string',
+          options: {
+            list: [
+              {title: 'Featured', value: 'featured'},
+              {title: 'Chain', value: 'chain'},
+              {title: 'dApps', value: 'dapps'},
+              {title: 'Infrastructure', value: 'infrastructure'},
+              {title: 'Tokenization', value: 'tokenization'},
+              {title: 'Community', value: 'community'},
+              {title: 'Learn', value: 'learn'},
+            ],
+          },
+        },
+      ],
+      validation: (rule) => rule.required().min(1),
+    }),
   ],
 })

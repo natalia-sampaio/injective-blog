@@ -1,0 +1,47 @@
+name: Deploy Sanity Studio
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - "studio-layer/**"
+
+jobs:
+    deploy:
+        name: Deploy Sanity Studio
+        runs-on: ubuntu-latest
+        defaults:
+            run:
+                working-directory: studio-layer
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 18
+                  cache: npm
+                  cache-dependency-path: studio-layer/package-lock.json
+
+            - name: Install Dependencies
+              run: npm install
+
+            - name: Build Sanity Studio
+              run: npm run build
+
+            - name: Authenticate with Sanity
+              run: sanity login --token ${{ secrets.SANITY_AUTH_TOKEN }}
+
+            - name: Deploy Sanity Studio
+              run: sanity deploy --yes
+
+            - name: Notify on Success
+              if: success()
+              run: echo "Sanity Studio deployed successfully!"
+
+            - name: Notify on Failure
+              if: failure()
+              run: echo "Sanity Studio deployment failed!"
