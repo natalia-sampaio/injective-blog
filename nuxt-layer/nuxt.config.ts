@@ -5,7 +5,12 @@ export default defineNuxtConfig({
     modules: ["@nuxtjs/sanity", "@nuxt/ui"],
     css: ["~/assets/css/main.css"],
     sanity: {
-        projectId: "l2fdudnh",
-        dataset: "production",
+        projectId: process.env.SANITY_PROJECT_ID,
+        dataset: process.env.SANITY_DATASET,
+        visualEditing: {
+            token: process.env.SANITY_VIEWER_TOKEN,
+            studioUrl: process.env.SANITY_STUDIO_URL,
+            stega: true,
+        },
     },
 });
