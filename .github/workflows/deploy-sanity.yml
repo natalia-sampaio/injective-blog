@@ -6,6 +6,7 @@ on:
             - main
         paths:
             - "studio-layer/**"
+    workflow_dispatch:
 
 jobs:
     deploy:
