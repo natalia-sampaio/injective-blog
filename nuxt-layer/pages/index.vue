@@ -67,15 +67,18 @@ const tabs = computed(() => [
 
 const filteredPosts = (label: string | undefined) => {
     if (!posts.value) return [];
+
+    const selectedTab = tabs.value.find((tab) => tab.label === label);
+    if (!selectedTab) return [];
+
     if (label === "All Posts") return posts.value;
-    return posts.value.filter((post) => post.tags?.includes(label)) || [];
+
+    return label === "All Posts"
+        ? posts.value
+        : posts.value.filter((post) => post.tags?.includes(label));
 };
 
-const activeTab = ref<string | null>(null);
-
-onMounted(() => {
-    activeTab.value = "0";
-});
+const activeTab = ref("0");
 </script>
 
 <template>
