@@ -65,6 +65,8 @@ const tabs = computed(() => [
     ...(tags.value?.map((tag) => ({ label: tag.title })) || []),
 ]);
 
+const activeTab = ref("0");
+
 const filteredPosts = (label: string | undefined) => {
     if (!posts.value) return []; // Prevent errors if posts are not yet loaded
     if (label === "All Posts") return posts.value; // Show all posts if "All Posts" is selected
@@ -92,6 +94,7 @@ const filteredPosts = (label: string | undefined) => {
                 <HeroSection :hero="featuredPosts" />
                 <section>
                     <UTabs
+                        v-model="activeTab"
                         :ui="{
                             label: 'font-sans text-sm font-normal',
                         }"
