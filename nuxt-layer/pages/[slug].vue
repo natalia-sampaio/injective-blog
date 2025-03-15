@@ -1,19 +1,13 @@
 <script setup lang="ts">
-import type { SanityDocument } from "@sanity/client";
-import imageUrlBuilder from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { POST_QUERY } from "@/utils/queries";
+import type { POST_QUERYResult } from "../../studio-layer/sanity.types";
 
 const { params } = useRoute();
 
-const { data: post } = await useSanityQuery<SanityDocument>(POST_QUERY, params);
-
-const { projectId, dataset } = useSanity().client.config();
-
-const urlFor = (source: SanityImageSource) =>
-    projectId && dataset
-        ? imageUrlBuilder({ projectId, dataset }).image(source)
-        : null;
+const { data: post } = await useSanityQuery<POST_QUERYResult>(
+    POST_QUERY,
+    params
+);
 </script>
 
 <template>
@@ -22,8 +16,8 @@ const urlFor = (source: SanityImageSource) =>
         class="container mx-auto min-h-screen max-w-3xl p-8 flex flex-col gap-4">
         <a href="/" class="hover:underline">&larr; Back to posts</a>
         <img
-            v-if="post.image"
-            :src="urlFor(post.image).width(550).height(310).url()"
+            v-if="post.imageUrl"
+            :src="post.imageUrl"
             :alt="post?.title"
             class="aspect-video rounded-xl"
             width="550"

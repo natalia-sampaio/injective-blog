@@ -33,7 +33,9 @@ export const postType = defineType({
     }),
     defineField({
       name: 'tags',
+      title: 'Tags',
       type: 'array',
+      description: 'Select one or more tags for this post.',
       of: [{type: 'reference', to: [{type: 'tags'}]}],
       validation: (rule) => rule.required().min(1),
     }),

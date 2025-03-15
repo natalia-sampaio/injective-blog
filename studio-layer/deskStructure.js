@@ -14,7 +14,7 @@ export const myStructure = (S) =>
               S.listItem()
                 .title('Featured Posts')
                 .child(S.document().schemaType('featuredPosts').documentId('featuredPosts')),
-              S.listItem().title('Tags').child(S.document().schemaType('tags').documentId('tags')),
+              S.documentTypeListItem('tags').title('Tags'),
             ]),
         ),
       S.listItem()
@@ -22,6 +22,6 @@ export const myStructure = (S) =>
         .child(S.document().schemaType('homePage').documentId('homePage')),
       ...S.documentTypeListItems().filter(
         (listItem) =>
-          !['homePage', 'featuredPosts', 'tags', 'siteSettings'].includes(listItem.getId()),
+          !['homePage', 'tags', 'featuredPosts', 'siteSettings'].includes(listItem.getId()),
       ),
     ])

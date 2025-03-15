@@ -1,0 +1,6 @@
+{
+  "path": ["utils/**/*.ts", "../nuxt-layer/utils/**/*.ts"],
+  "schema": "schema.json",
+  "generates": "sanity.types.ts",
+  "overloadClientMethods": true
+}

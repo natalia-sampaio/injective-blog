@@ -1,18 +1,38 @@
-export const POSTS_QUERY = groq`*[
-  _type == "post"
-  && defined(slug.current)
-]|order(publishedAt desc)[0...12]{_id, title, slug, publishedAt, image, body[0], categories}`;
+import groq from "groq";
 
-export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]`;
-
-export const HOME_PAGE_QUERY = groq`*[_type == "homePage"][0]{
+export const HERO_QUERY = groq`
+  *[_type == "featuredPosts"][0]{
     featuredPosts[]->{
       _id,
       title,
       slug,
-      image,
       publishedAt,
-      categories,
-      body[0]
+      "imageUrl": image.asset->url,
+      body[0],
+      "tags": tags[]->title
     }
-  }`;
+  }
+`;
+
+export const POSTS_QUERY = groq`
+  *[_type == "post"]{
+    _id,
+    title,
+    slug,
+    publishedAt,
+    "imageUrl": image.asset->url,
+    body[0],
+    "tags": tags[]->title
+  }
+`;
+
+export const POST_QUERY = groq`
+  *[_type == "post" && slug.current == $slug][0]{
+    _id,
+    title,
+    slug,
+    publishedAt,
+    "imageUrl": image.asset->url,
+    body
+  }
+`;
