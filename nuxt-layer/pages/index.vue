@@ -65,13 +65,17 @@ const tabs = computed(() => [
     ...(tags.value?.map((tag) => ({ label: tag.title })) || []),
 ]);
 
-const activeTab = ref("0");
-
 const filteredPosts = (label: string | undefined) => {
-    if (!posts.value) return []; // Prevent errors if posts are not yet loaded
-    if (label === "All Posts") return posts.value; // Show all posts if "All Posts" is selected
-    return posts.value.filter((post) => post.tags?.includes(label)) || []; // Ensure filtering works
+    if (!posts.value) return [];
+    if (label === "All Posts") return posts.value;
+    return posts.value.filter((post) => post.tags?.includes(label)) || [];
 };
+
+const activeTab = ref<string | null>(null);
+
+onMounted(() => {
+    activeTab.value = "0";
+});
 </script>
 
 <template>
