@@ -86,7 +86,7 @@ const today = new Date().toLocaleDateString(undefined, options);
                             :ui="{
                                 root: 'group h-[434px] relative overflow-hidden ',
                                 body: '!p-0 duration-300 group-hover:translate-y-[-40px] overflow-hidden',
-                                footer: 'absolute bottom-0 left-0 right-0 bg-[inherit] rounded-b-[inherit]',
+                                footer: 'absolute bottom-0 left-0 right-0 bg-[inherit] rounded-b-[inherit] flex gap-2',
                             }"
                             variant="solid">
                             <img
@@ -110,10 +110,12 @@ const today = new Date().toLocaleDateString(undefined, options);
                                 </p>
                             </div>
                             <template #footer>
-                                <span
-                                    class="group-hover:bg-sky-100 border border-sky-200 px-2 py-1 rounded font-mono text-xs capitalize"
-                                    >community</span
-                                >
+                                <div
+                                    v-for="category in post.categories"
+                                    :key="category"
+                                    class="group-hover:bg-sky-100 border border-sky-200 px-2 py-1 rounded font-mono text-xs capitalize">
+                                    {{ category }}
+                                </div>
                             </template>
                         </UCard>
                     </nuxt-link>
