@@ -30,6 +30,12 @@ jobs:
             - name: Install Dependencies
               run: npm install
 
+            - name: Generate Sanity Schema Extract
+              run: npm run schema
+
+            - name: Generate Sanity Type Definitions
+              run: npm run typegen
+
             - name: Build Sanity Studio
               run: npm run build
 

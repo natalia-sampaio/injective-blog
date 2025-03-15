@@ -347,6 +347,12 @@ export type POST_QUERYResult = {
     _key: string
   }> | null
 } | null
+// Variable: TAGS_QUERY
+// Query: *[_type == "tags"]{    title,    "slug": slug.current  }
+export type TAGS_QUERYResult = Array<{
+  title: null
+  slug: null
+}>
 
 // Query TypeMap
 import '@sanity/client'
@@ -355,5 +361,6 @@ declare module '@sanity/client' {
     '\n  *[_type == "featuredPosts"][0]{\n    featuredPosts[]->{\n      _id,\n      title,\n      slug,\n      publishedAt,\n      "imageUrl": image.asset->url,\n      body[0],\n      "tags": tags[]->title\n    }\n  }\n': HERO_QUERYResult
     '\n  *[_type == "post"]{\n    _id,\n    title,\n    slug,\n    publishedAt,\n    "imageUrl": image.asset->url,\n    body[0],\n    "tags": tags[]->title\n  }\n': POSTS_QUERYResult
     '\n  *[_type == "post" && slug.current == $slug][0]{\n    _id,\n    title,\n    slug,\n    publishedAt,\n    "imageUrl": image.asset->url,\n    body\n  }\n': POST_QUERYResult
+    '\n  *[_type == "tags"]{\n    title,\n    "slug": slug.current\n  }\n': TAGS_QUERYResult
   }
 }

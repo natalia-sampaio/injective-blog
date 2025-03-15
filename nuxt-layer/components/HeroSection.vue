@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { HERO_QUERYResult } from "../../studio-layer/sanity.types";
 
-const props = defineProps<{
+defineProps<{
     hero: HERO_QUERYResult;
 }>();
 </script>

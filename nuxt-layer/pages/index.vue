@@ -4,13 +4,17 @@ import Logo from "~/assets/icons/Logo.vue";
 import type {
     HERO_QUERYResult,
     POSTS_QUERYResult,
+    TAGS_QUERYResult,
 } from "../../studio-layer/sanity.types";
+import PostGridSection from "~/components/PostGridSection.vue";
 
 const { data: posts } = await useSanityQuery<POSTS_QUERYResult>(POSTS_QUERY);
 
 const { data: featuredPosts } = await useSanityQuery<HERO_QUERYResult>(
     HERO_QUERY
 );
+
+const { data: tags } = await useSanityQuery<TAGS_QUERYResult>(TAGS_QUERY);
 
 const items = ref([
     [
@@ -56,18 +60,16 @@ const options = {
 
 const today = new Date().toLocaleDateString(undefined, options);
 
-const tabs = ref([
-    {
-        label: "Account",
-        icon: "i-lucide-user",
-        content: "This is the account content.",
-    },
-    {
-        label: "Password",
-        icon: "i-lucide-lock",
-        content: "This is the password content.",
-    },
+const tabs = computed(() => [
+    { label: "All Posts" },
+    ...(tags.value?.map((tag) => ({ label: tag.title })) || []),
 ]);
+
+const filteredPosts = (label: string | undefined) => {
+    if (!posts.value) return []; // Prevent errors if posts are not yet loaded
+    if (label === "All Posts") return posts.value; // Show all posts if "All Posts" is selected
+    return posts.value.filter((post) => post.tags?.includes(label)) || []; // Ensure filtering works
+};
 </script>
 
 <template>
@@ -89,54 +91,21 @@ const tabs = ref([
                 </section>
                 <HeroSection :hero="featuredPosts" />
                 <section>
-                    <UTabs :items="tabs" class="w-full px-9 pt-10 pb-7" />
-                    <div class="grid grid-cols-3 gap-5 w-full">
-                        <nuxt-link
-                            v-for="post in posts"
-                            :key="post._id"
-                            :to="`/${post.slug?.current}`"
-                            target="_blank">
-                            <UCard
-                                :ui="{
-                                    root: 'group h-[434px] relative overflow-hidden ',
-                                    body: '!p-0 duration-300 group-hover:translate-y-[-40px] overflow-hidden',
-                                    footer: 'absolute bottom-0 left-0 right-0 bg-[inherit] rounded-b-[inherit] flex gap-2',
-                                }"
-                                variant="outline">
-                                <img
-                                    class="rounded-t-[calc(var(--ui-radius)*2)]"
-                                    :src="post.imageUrl"
-                                    :alt="post.title" />
-                                <div class="h-fit p-6">
-                                    <span class="font-mono opacity-60 text-xs">
-                                        {{
-                                            new Date(
-                                                post.publishedAt
-                                            ).toLocaleDateString(
-                                                undefined,
-                                                options
-                                            )
-                                        }}
-                                    </span>
-                                    <h2
-                                        class="text-3xl tracking-tight line-clamp-2">
-                                        {{ post.title }}
-                                    </h2>
-                                    <p class="text-gray-700 line-clamp-3">
-                                        {{ post.body.children[0].text }}
-                                    </p>
-                                </div>
-                                <template #footer>
-                                    <div
-                                        v-for="category in post.tags"
-                                        :key="category"
-                                        class="group-hover:bg-sky-100 border border-sky-200 px-2 py-1 rounded font-mono text-xs capitalize">
-                                        {{ category }}
-                                    </div>
-                                </template>
-                            </UCard>
-                        </nuxt-link>
-                    </div>
+                    <UTabs
+                        :ui="{
+                            label: 'font-sans text-sm font-normal',
+                        }"
+                        :items="tabs"
+                        class="w-full pt-10 pb-7">
+                        <template #content="{ item }">
+                            <PostGridSection
+                                v-if="filteredPosts(item.label).length"
+                                :content="filteredPosts(item.label)" />
+                            <p v-else class="text-gray-500 text-center">
+                                No posts found for "{{ item.label }}"
+                            </p>
+                        </template>
+                    </UTabs>
                 </section>
             </main>
         </UContainer>

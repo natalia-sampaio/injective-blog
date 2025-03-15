@@ -36,3 +36,10 @@ export const POST_QUERY = groq`
     body
   }
 `;
+
+export const TAGS_QUERY = groq`
+  *[_type == "tags"]{
+    title,
+    "slug": slug.current
+  }
+`;
