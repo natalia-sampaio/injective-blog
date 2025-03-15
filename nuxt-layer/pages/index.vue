@@ -68,9 +68,6 @@ const tabs = computed(() => [
 const filteredPosts = (label: string | undefined) => {
     if (!posts.value) return [];
 
-    const selectedTab = tabs.value.find((tab) => tab.label === label);
-    if (!selectedTab) return [];
-
     if (label === "All Posts") return posts.value;
 
     return label === "All Posts"
