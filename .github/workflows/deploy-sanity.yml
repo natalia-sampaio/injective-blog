@@ -34,7 +34,7 @@ jobs:
               run: npm run build
 
             - name: Deploy Sanity Studio
-              run: sanity deploy
+              run: npx sanity deploy
 
             - name: Notify on Success
               if: success()
