@@ -76,9 +76,6 @@ const filteredPosts = (label: string | undefined) => {
 };
 
 const activeTab = ref("0");
-watch(activeTab, (newValue) => {
-    console.log("Active tab changed to:", newValue);
-});
 </script>
 
 <template>
@@ -102,6 +99,9 @@ watch(activeTab, (newValue) => {
                 <section>
                     <UTabs
                         v-model="activeTab"
+                        @update:modelValue="
+                            (val) => console.log('Tab clicked:', val)
+                        "
                         :ui="{
                             label: 'font-sans text-sm font-normal',
                         }"
