@@ -34,7 +34,7 @@ jobs:
               run: npm run build
 
             - name: Authenticate with Sanity
-              run: sanity login --token ${{ secrets.SANITY_AUTH_TOKEN }}
+              run: npx sanity login --token ${{ secrets.SANITY_AUTH_TOKEN }}
 
             - name: Deploy Sanity Studio
               run: npx sanity deploy
