@@ -32,24 +32,9 @@ export const postType = defineType({
       of: [{type: 'block'}],
     }),
     defineField({
-      name: 'categories',
+      name: 'tags',
       type: 'array',
-      of: [
-        {
-          type: 'string',
-          options: {
-            list: [
-              {title: 'Featured', value: 'featured'},
-              {title: 'Chain', value: 'chain'},
-              {title: 'dApps', value: 'dapps'},
-              {title: 'Infrastructure', value: 'infrastructure'},
-              {title: 'Tokenization', value: 'tokenization'},
-              {title: 'Community', value: 'community'},
-              {title: 'Learn', value: 'learn'},
-            ],
-          },
-        },
-      ],
+      of: [{type: 'reference', to: [{type: 'tags'}]}],
       validation: (rule) => rule.required().min(1),
     }),
   ],
