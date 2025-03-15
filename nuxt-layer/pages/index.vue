@@ -97,25 +97,24 @@ const activeTab = ref("0");
                 </section>
                 <HeroSection :hero="featuredPosts" />
                 <section>
-                    <UTabs
-                        v-model="activeTab"
-                        @update:modelValue="
-                            (val) => console.log('Tab clicked:', val)
-                        "
-                        :ui="{
-                            label: 'font-sans text-sm font-normal',
-                        }"
-                        :items="tabs"
-                        class="w-full pt-10 pb-7">
-                        <template #content="{ item }">
-                            <PostGridSection
-                                v-if="filteredPosts(item.label).length"
-                                :content="filteredPosts(item.label)" />
-                            <p v-else class="text-gray-500 text-center">
-                                No posts found for "{{ item.label }}"
-                            </p>
-                        </template>
-                    </UTabs>
+                    <ClientOnly>
+                        <UTabs
+                            v-model="activeTab"
+                            :ui="{
+                                label: 'font-sans text-sm font-normal',
+                            }"
+                            :items="tabs"
+                            class="w-full pt-10 pb-7">
+                            <template #content="{ item }">
+                                <PostGridSection
+                                    v-if="filteredPosts(item.label).length"
+                                    :content="filteredPosts(item.label)" />
+                                <p v-else class="text-gray-500 text-center">
+                                    No posts found for "{{ item.label }}"
+                                </p>
+                            </template>
+                        </UTabs>
+                    </ClientOnly>
                 </section>
             </main>
         </UContainer>
