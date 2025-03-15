@@ -33,11 +33,10 @@ jobs:
             - name: Build Sanity Studio
               run: npm run build
 
-            - name: Authenticate with Sanity
-              run: npx sanity login --token ${{ secrets.SANITY_AUTH_TOKEN }}
-
             - name: Deploy Sanity Studio
-              run: npx sanity deploy
+              env:
+                  SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+              run: npx sanity deploy --yes
 
             - name: Notify on Success
               if: success()
