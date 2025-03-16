@@ -105,12 +105,17 @@ const isDark = computed({
                             <Logo />
                         </template>
                         <template #theme-switch>
-                            <USwitch
-                                unchecked-icon="i-lucide-sun"
-                                checked-icon="i-lucide-moon"
-                                color="neutral"
-                                size="xl"
-                                v-model="isDark" />
+                            <ClientOnly v-if="!colorMode?.forced">
+                                <USwitch
+                                    unchecked-icon="i-lucide-sun"
+                                    checked-icon="i-lucide-moon"
+                                    color="neutral"
+                                    size="xl"
+                                    v-model="isDark" />
+                                <template #fallback>
+                                    <div class="size-8" />
+                                </template>
+                            </ClientOnly>
                         </template>
                     </UNavigationMenu>
                     <div class="flex items-end justify-between pb-12 h-[512px]">
