@@ -279,6 +279,28 @@ export type AllSanitySchemaTypes =
   | Slug
 export declare const internalGroqTypeReferenceTo: unique symbol
 // Source: ../nuxt-layer/utils/queries.ts
+// Variable: METADATA_QUERY
+// Query: *[_type == "siteSettings"][0]
+export type METADATA_QUERYResult = {
+  _id: string
+  _type: 'siteSettings'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  siteTitle?: string
+  siteDescription?: string
+  sitePreview?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+} | null
 // Variable: HERO_QUERY
 // Query: *[_type == "featuredPosts"][0]{    featuredPosts[]->{      _id,      title,      slug,      publishedAt,      "imageUrl": image.asset->url,      body[0],      "tags": tags[]->title    }  }
 export type HERO_QUERYResult = {
@@ -396,6 +418,7 @@ export type FOOTER_QUERYResult = {
 import '@sanity/client'
 declare module '@sanity/client' {
   interface SanityQueries {
+    '\n  *[_type == "siteSettings"][0]\n': METADATA_QUERYResult
     '\n  *[_type == "featuredPosts"][0]{\n    featuredPosts[]->{\n      _id,\n      title,\n      slug,\n      publishedAt,\n      "imageUrl": image.asset->url,\n      body[0],\n      "tags": tags[]->title\n    }\n  }\n': HERO_QUERYResult
     '\n  *[_type == "post"]{\n    _id,\n    title,\n    slug,\n    publishedAt,\n    "imageUrl": image.asset->url,\n    body[0],\n    "tags": tags[]->title\n  }\n': POSTS_QUERYResult
     '\n  *[_type == "post" && slug.current == $slug][0]{\n    _id,\n    title,\n    slug,\n    publishedAt,\n    "imageUrl": image.asset->url,\n    body\n  }\n': POST_QUERYResult

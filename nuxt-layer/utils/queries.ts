@@ -1,5 +1,9 @@
 import groq from "groq";
 
+export const METADATA_QUERY = groq`
+  *[_type == "siteSettings"][0]
+`;
+
 export const HERO_QUERY = groq`
   *[_type == "featuredPosts"][0]{
     featuredPosts[]->{
