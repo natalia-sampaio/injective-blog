@@ -66,48 +66,72 @@ const tabs = computed(() => [
 ]);
 
 const filteredPosts = (label: string | undefined) => {
-    if (!posts.value) return []; // Prevent errors if posts are not yet loaded
-    if (label === "All Posts") return posts.value; // Show all posts if "All Posts" is selected
-    return posts.value.filter((post) => post.tags?.includes(label)) || []; // Ensure filtering works
+    if (!posts.value) return [];
+    if (label === "All Posts") return posts.value;
+    return posts.value.filter((post) => post.tags?.includes(label)) || [];
 };
 </script>
 
 <template>
     <UApp>
-        <UContainer>
+        <div class="bg-[rgb(76,60,248)] dark:bg-[rgb(48,32,128)] text-white">
             <header>
-                <UNavigationMenu :items="items" class="w-full justify-between">
-                    <template #logo>
-                        <Logo />
-                    </template>
-                </UNavigationMenu>
-            </header>
-            <main class="container mx-auto min-h-screen p-10">
-                <section class="flex items-end justify-between pb-12">
-                    <h1 class="text-6xl md:text-[120px] mb-8 tracking-[-2px]">
-                        Injective Blog
-                    </h1>
-                    <span class="font-mono">{{ today }}</span>
-                </section>
-                <HeroSection :hero="featuredPosts" />
-                <section>
-                    <UTabs
+                <UContainer>
+                    <UNavigationMenu
                         :ui="{
-                            label: 'font-sans text-sm font-normal',
+                            linkLabelExternalIcon: 'text-white',
+                            link: 'text-white font-sans font-normal',
+                            linkLeadingIcon: 'text-white',
                         }"
-                        :items="tabs"
-                        class="w-full pt-10 pb-7">
-                        <template #content="{ item }">
-                            <PostGridSection
-                                v-if="filteredPosts(item.label).length"
-                                :content="filteredPosts(item.label)" />
-                            <p v-else class="text-gray-500 text-center">
-                                No posts found for "{{ item.label }}"
-                            </p>
+                        :items="items"
+                        class="w-full justify-between">
+                        <template #logo>
+                            <Logo />
                         </template>
-                    </UTabs>
-                </section>
+                    </UNavigationMenu>
+                    <div class="flex items-end justify-between pb-12 h-[512px]">
+                        <h1
+                            class="text-6xl md:text-[120px] mb-8 tracking-[-2px]">
+                            Injective Blog
+                        </h1>
+                        <span class="font-mono">{{ today }}</span>
+                    </div>
+                </UContainer>
+            </header>
+            <main
+                class="rounded-t-4xl pt-18 bg-(--ui-bg) text-(--ui-bg-inverted)">
+                <UContainer>
+                    <HeroSection :hero="featuredPosts" />
+                    <section>
+                        <UTabs
+                            :ui="{
+                                label: 'font-sans text-sm font-normal',
+                            }"
+                            :items="tabs"
+                            class="w-full pt-10 pb-7">
+                            <template #content="{ item }">
+                                <PostGridSection
+                                    v-if="filteredPosts(item.label).length"
+                                    :content="filteredPosts(item.label)" />
+                                <div
+                                    v-else
+                                    class="flex flex-col font-sans items-center text-gray-500">
+                                    <span class="text-xl"
+                                        >😕 No posts found for "{{
+                                            item.label
+                                        }}"</span
+                                    >
+                                    <p class="text-sm">
+                                        Check back later or try a different
+                                        category.
+                                    </p>
+                                </div>
+                            </template>
+                        </UTabs>
+                    </section>
+                </UContainer>
             </main>
-        </UContainer>
+            <Footer />
+        </div>
     </UApp>
 </template>

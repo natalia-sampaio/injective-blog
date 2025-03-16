@@ -27,7 +27,7 @@ defineProps<{
                         {{ hero.featuredPosts[0].title }}
                     </h2>
                     <p
-                        class="text-gray-700 line-clamp-3 opacity-0 group-hover:opacity-50 duration-300">
+                        class="line-clamp-3 opacity-0 group-hover:opacity-50 duration-300">
                         {{ hero.featuredPosts[0].body.children[0].text }}
                     </p>
                 </div>
@@ -39,12 +39,10 @@ defineProps<{
                             ).toLocaleDateString(undefined, options)
                         }}
                     </span>
-                    <div
+                    <PostTag
                         v-for="category in hero.featuredPosts[0].tags"
                         :key="category"
-                        class="group-hover:bg-sky-100 border border-sky-200 px-2 py-1 rounded font-mono text-xs capitalize ml-2">
-                        {{ category }}
-                    </div>
+                        :tag-name="category" />
                 </template>
             </UCard>
         </nuxt-link>
@@ -57,12 +55,12 @@ defineProps<{
                 class="group">
                 <UCard
                     :ui="{
-                        root: 'group bg-sky-100  hover:bg-orange-100 text-(--ui-bg-inverted) dark:text-(--ui-bg)',
+                        root: 'group',
+
                         footer: ' flex gap-2',
                     }"
                     variant="solid">
-                    <span
-                        class="font-mono text-xs group-hover:text-orange-950 opacity-50">
+                    <span class="font-mono text-xs opacity-50">
                         {{
                             new Date(post.publishedAt).toLocaleDateString(
                                 undefined,
@@ -70,17 +68,14 @@ defineProps<{
                             )
                         }}
                     </span>
-                    <h3
-                        class="text-2xl group-hover:text-orange-950 line-clamp-3">
+                    <h3 class="text-2xl line-clamp-3">
                         {{ post.title }}
                     </h3>
                     <template #footer>
-                        <div
+                        <PostTag
                             v-for="category in post.tags"
                             :key="category"
-                            class="group-hover:bg-orange-950 group-hover:border-orange-950 group-hover:text-white border border-sky-200 px-2 py-1 rounded font-mono text-xs capitalize w-fit">
-                            {{ category }}
-                        </div>
+                            :tag-name="category" />
                     </template>
                 </UCard>
             </nuxt-link>

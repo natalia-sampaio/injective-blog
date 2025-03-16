@@ -41,17 +41,15 @@ const options = {
                     <h2 class="text-3xl tracking-tight line-clamp-2">
                         {{ post.title }}
                     </h2>
-                    <p class="text-gray-700 line-clamp-3">
+                    <p class="opacity-60 line-clamp-3">
                         {{ post.body.children[0].text }}
                     </p>
                 </div>
                 <template #footer>
-                    <div
+                    <PostTag
                         v-for="category in post.tags"
                         :key="category"
-                        class="group-hover:bg-sky-100 border border-sky-200 px-2 py-1 rounded font-mono text-xs capitalize">
-                        {{ category }}
-                    </div>
+                        :tag-name="category" />
                 </template>
             </UCard>
         </nuxt-link>
