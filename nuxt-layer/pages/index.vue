@@ -49,6 +49,9 @@ const items = ref([
             to: "https://injective.com/community/",
             target: "_blank",
         },
+        {
+            slot: "theme-switch",
+        },
     ],
 ]);
 
@@ -70,6 +73,19 @@ const filteredPosts = (label: string | undefined) => {
     if (label === "All Posts") return posts.value;
     return posts.value.filter((post) => post.tags?.includes(label)) || [];
 };
+
+const colorMode = useColorMode();
+if (!colorMode.preference || colorMode.preference === "unknown") {
+    colorMode.preference = "system";
+}
+const isDark = computed({
+    get() {
+        return colorMode.value === "dark";
+    },
+    set() {
+        colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
+    },
+});
 </script>
 
 <template>
@@ -87,6 +103,14 @@ const filteredPosts = (label: string | undefined) => {
                         class="w-full justify-between">
                         <template #logo>
                             <Logo />
+                        </template>
+                        <template #theme-switch>
+                            <USwitch
+                                unchecked-icon="i-lucide-sun"
+                                checked-icon="i-lucide-moon"
+                                color="neutral"
+                                size="xl"
+                                v-model="isDark" />
                         </template>
                     </UNavigationMenu>
                     <div class="flex items-end justify-between pb-12 h-[512px]">
