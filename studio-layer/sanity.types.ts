@@ -68,6 +68,26 @@ export type Geopoint = {
   alt?: number
 }
 
+export type Footer = {
+  _id: string
+  _type: 'footer'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  linkGroups?: Array<{
+    title?: string
+    links?: Array<{
+      label?: string
+      url?: string
+      _key: string
+    }>
+    _key: string
+  }>
+  copyright?: string
+  privacy?: string
+  terms?: string
+}
+
 export type SiteSettings = {
   _id: string
   _type: 'siteSettings'
@@ -125,12 +145,8 @@ export type Tags = {
   _createdAt: string
   _updatedAt: string
   _rev: string
-  tagList?: Array<{
-    title?: string
-    slug?: Slug
-    _type: 'tag'
-    _key: string
-  }>
+  title?: string
+  slug?: Slug
 }
 
 export type Post = {
@@ -249,6 +265,7 @@ export type AllSanitySchemaTypes =
   | SanityImageDimensions
   | SanityFileAsset
   | Geopoint
+  | Footer
   | SiteSettings
   | FeaturedPosts
   | HomePage
@@ -289,7 +306,7 @@ export type HERO_QUERYResult = {
       _type: 'block'
       _key: string
     } | null
-    tags: Array<null> | null
+    tags: Array<string | null> | null
   }> | null
 } | null
 // Variable: POSTS_QUERY
@@ -318,7 +335,7 @@ export type POSTS_QUERYResult = Array<{
     _type: 'block'
     _key: string
   } | null
-  tags: Array<null> | null
+  tags: Array<string | null> | null
 }>
 // Variable: POST_QUERY
 // Query: *[_type == "post" && slug.current == $slug][0]{    _id,    title,    slug,    publishedAt,    "imageUrl": image.asset->url,    body  }
@@ -350,9 +367,30 @@ export type POST_QUERYResult = {
 // Variable: TAGS_QUERY
 // Query: *[_type == "tags"]{    title,    "slug": slug.current  }
 export type TAGS_QUERYResult = Array<{
-  title: null
-  slug: null
+  title: string | null
+  slug: string | null
 }>
+// Variable: FOOTER_QUERY
+// Query: *[_type == "footer"] | order(_updatedAt desc) [0]
+export type FOOTER_QUERYResult = {
+  _id: string
+  _type: 'footer'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  linkGroups?: Array<{
+    title?: string
+    links?: Array<{
+      label?: string
+      url?: string
+      _key: string
+    }>
+    _key: string
+  }>
+  copyright?: string
+  privacy?: string
+  terms?: string
+} | null
 
 // Query TypeMap
 import '@sanity/client'
@@ -362,5 +400,6 @@ declare module '@sanity/client' {
     '\n  *[_type == "post"]{\n    _id,\n    title,\n    slug,\n    publishedAt,\n    "imageUrl": image.asset->url,\n    body[0],\n    "tags": tags[]->title\n  }\n': POSTS_QUERYResult
     '\n  *[_type == "post" && slug.current == $slug][0]{\n    _id,\n    title,\n    slug,\n    publishedAt,\n    "imageUrl": image.asset->url,\n    body\n  }\n': POST_QUERYResult
     '\n  *[_type == "tags"]{\n    title,\n    "slug": slug.current\n  }\n': TAGS_QUERYResult
+    '\n  *[_type == "footer"] | order(_updatedAt desc) [0]\n': FOOTER_QUERYResult
   }
 }

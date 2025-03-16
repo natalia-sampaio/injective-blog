@@ -22,6 +22,11 @@ export const myStructure = (S) =>
         .child(S.document().schemaType('homePage').documentId('homePage')),
       ...S.documentTypeListItems().filter(
         (listItem) =>
-          !['homePage', 'tags', 'featuredPosts', 'siteSettings'].includes(listItem.getId()),
+          !['homePage', 'tags', 'featuredPosts', 'siteSettings', 'footer'].includes(
+            listItem.getId(),
+          ),
       ),
+      S.listItem()
+        .title('Footer Configuration')
+        .child(S.document().schemaType('footer').documentId('footer')),
     ])
