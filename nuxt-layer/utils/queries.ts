@@ -43,3 +43,7 @@ export const TAGS_QUERY = groq`
     "slug": slug.current
   }
 `;
+
+export const FOOTER_QUERY = groq`
+  *[_type == "footer"] | order(_updatedAt desc) [0]
+`;

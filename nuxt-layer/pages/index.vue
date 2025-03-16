@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { POSTS_QUERY } from "@/utils/queries";
 import Logo from "~/assets/icons/Logo.vue";
 import type {
+    FOOTER_QUERYResult,
     HERO_QUERYResult,
     POSTS_QUERYResult,
     TAGS_QUERYResult,
@@ -15,6 +15,8 @@ const { data: featuredPosts } = await useSanityQuery<HERO_QUERYResult>(
 );
 
 const { data: tags } = await useSanityQuery<TAGS_QUERYResult>(TAGS_QUERY);
+
+const { data: footer } = await useSanityQuery<FOOTER_QUERYResult>(FOOTER_QUERY);
 
 const items = ref([
     [
@@ -160,7 +162,7 @@ const isDark = computed({
                     </section>
                 </UContainer>
             </main>
-            <Footer />
+            <Footer :content="footer" />
         </div>
     </UApp>
 </template>
