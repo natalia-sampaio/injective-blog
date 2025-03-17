@@ -2,7 +2,7 @@ import {defineField, defineType} from 'sanity'
 
 export const footerType = defineType({
   name: 'footer',
-  title: 'Footer Configuration',
+  title: 'Footer',
   type: 'document',
   fields: [
     defineField({
@@ -51,14 +51,6 @@ export const footerType = defineType({
               ],
             }),
           ],
-          preview: {
-            select: {
-              title: 'title',
-            },
-            prepare({title}) {
-              return {title: title || 'Unnamed Group'}
-            },
-          },
         },
       ],
     }),
@@ -84,4 +76,14 @@ export const footerType = defineType({
       validation: (Rule) => Rule.required(),
     }),
   ],
+  preview: {
+    select: {
+      title: 'footerTitle',
+    },
+    prepare() {
+      return {
+        title: 'Footer Configuration',
+      }
+    },
+  },
 })

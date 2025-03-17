@@ -129,21 +129,6 @@ export type FeaturedPosts = {
   }>
 }
 
-export type HomePage = {
-  _id: string
-  _type: 'homePage'
-  _createdAt: string
-  _updatedAt: string
-  _rev: string
-  featuredPosts?: Array<{
-    _ref: string
-    _type: 'reference'
-    _weak?: boolean
-    _key: string
-    [internalGroqTypeReferenceTo]?: 'post'
-  }>
-}
-
 export type Tags = {
   _id: string
   _type: 'tags'
@@ -291,7 +276,6 @@ export type AllSanitySchemaTypes =
   | Footer
   | SiteSettings
   | FeaturedPosts
-  | HomePage
   | Tags
   | Post
   | SanityImageCrop

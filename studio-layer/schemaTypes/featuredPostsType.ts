@@ -13,4 +13,14 @@ export const featuredPostsType = defineType({
       validation: (rule) => rule.required().min(4).max(4),
     }),
   ],
+  preview: {
+    select: {
+      title: 'featuredTitle',
+    },
+    prepare() {
+      return {
+        title: 'Manage Featured Posts',
+      }
+    },
+  },
 })
