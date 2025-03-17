@@ -111,6 +111,22 @@ The table below presents these platforms, incorporating our defined constraints:
 -   **Webhooks available**, allowing seamless content updates.
 -   A wealth of **official documentation** makes it easy to learn, integrate and upgrade.
 
+## Personal Opinions
+
+-   Sanity: Learning Sanity was a smooth experience. There’s plenty of good documentation, and I never felt stuck. The most challenging part was embedding a YouTube video within the body of a post, but overall, it was an intuitive platform to work with.
+
+-   Nuxt.js: Straightforward and fast. It made development efficient without unnecessary complexity.
+
+-   Tailwind CSS: As easy as breathing. The utility-first approach makes styling quick and effortless.
+
+-   Nuxt UI: This was my first time using Nuxt UI, and it was easy to pick up. It’s fast, has great performance, and provides solid accessibility features.
+
+-   Composition API: Very easy, especially since I’m already used to it. It feels natural to work with.
+
+-   TypeScript: No issues at all. I’m very familiar with it, so using it was seamless.
+
+-   Netlify: Working with Netlify was a bit tricky at first, but after overcoming some initial hurdles, I now feel confident using the platform. One of the main challenges I faced was with the publish directory—I initially left it unset, assuming Netlify would automatically resolve it to `.output`, Nuxt's default build folder. However, Netlify requires this to be explicitly set to `dist` for the deployment to work correctly. Once I made that adjustment, the JavaScript files loaded properly in production.
+
 ---
 
 ## Nuxt Minimal Starter
