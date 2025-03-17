@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { POST_QUERY } from "@/utils/queries";
 import type { POST_QUERYResult } from "../../studio-layer/sanity.types";
+import YouTube from "vue3-youtube";
 
 const { params } = useRoute();
 
@@ -8,6 +9,20 @@ const { data: post } = await useSanityQuery<POST_QUERYResult>(
     POST_QUERY,
     params
 );
+
+const serializers = {
+    types: {
+        youTube: (props: any) => {
+            console.log("YouTube Block Data:", JSON.stringify(props, null, 2)); // Debug
+            const url = props?.url || "";
+            if (!url) {
+                console.warn("YouTube block is missing a URL:", props);
+                return null;
+            }
+            return h(YouTube, { src: url });
+        },
+    },
+};
 </script>
 
 <template>
@@ -29,7 +44,11 @@ const { data: post } = await useSanityQuery<POST_QUERYResult>(
             <p v-if="post.publishedAt">
                 Published: {{ new Date(post.publishedAt).toLocaleDateString() }}
             </p>
-            <SanityContent v-if="post.body" :blocks="post.body" />
+
+            <SanityContent
+                v-if="post.body"
+                :blocks="post.body"
+                :serializers="serializers" />
         </div>
     </main>
 </template>
