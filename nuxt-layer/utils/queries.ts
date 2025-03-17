@@ -1,7 +1,15 @@
 import groq from "groq";
 
 export const METADATA_QUERY = groq`
-  *[_type == "siteSettings"][0]
+  *[_type == "siteSettings"][0]{
+  siteTitle,
+  siteDescription,
+  sitePreview {
+      _type == "image" => {
+        "url": asset->url
+      }
+  }
+}
 `;
 
 export const HERO_QUERY = groq`

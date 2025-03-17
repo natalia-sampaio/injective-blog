@@ -3,7 +3,7 @@ export default defineNuxtConfig({
     ssr: true,
     compatibilityDate: "2024-11-01",
     devtools: { enabled: true },
-    modules: ["@nuxtjs/sanity", "@nuxt/ui"],
+    modules: ["@nuxtjs/sanity", "@nuxt/ui", "@nuxtjs/i18n"],
     css: ["~/assets/css/main.css"],
     sanity: {
         projectId: process.env.SANITY_PROJECT_ID,

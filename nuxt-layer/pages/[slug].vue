@@ -3,11 +3,11 @@ import { POST_QUERY } from "@/utils/queries";
 import type { POST_QUERYResult } from "../../studio-layer/sanity.types";
 import YouTube from "vue3-youtube";
 
-const { params } = useRoute();
+const route = useRoute();
 
 const { data: post } = await useSanityQuery<POST_QUERYResult>(
     POST_QUERY,
-    params
+    route.params
 );
 
 const serializers = {
@@ -32,6 +32,15 @@ const serializers = {
         },
     },
 };
+
+const postMetadata = {
+    title: post.value?.title,
+    description: post.value?.body[0].children[0].text,
+    image: post.value?.imageUrl,
+    type: "article",
+};
+
+useSeo({ metadata: postMetadata, url: route.fullPath });
 </script>
 
 <template>

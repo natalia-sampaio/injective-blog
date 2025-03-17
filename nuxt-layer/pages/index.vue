@@ -41,31 +41,14 @@ const filteredPosts = (label: string | undefined) => {
     return posts.value.filter((post) => post.tags?.includes(label)) || [];
 };
 
-const ogImage = computed(
-    () => `https://injective-blog.netlify.app/.netlify/functions/screenshots`
-);
+const siteMetadata = {
+    title: metadata?.value?.siteTitle,
+    description: metadata.value?.siteDescription,
+    image: metadata.value?.sitePreview,
+    type: "website",
+};
 
-useSeoMeta({
-    link: { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
-    title: metadata.value?.siteTitle || "Injective Blog",
-    description:
-        metadata.value?.siteDescription || "Stay updated with Injective",
-    ogTitle: metadata.value?.siteTitle || "Injective Blog",
-    ogDescription:
-        metadata.value?.siteDescription || "Stay updated with Injective",
-    ogImage: ogImage.value,
-    ogImageType: "image/jpeg",
-    ogImageWidth: "1200",
-    ogImageHeight: "630",
-    ogUrl: "https://injective-blog.netlify.app",
-    ogType: "website",
-    twitterCard: "summary_large_image",
-    twitterTitle: metadata.value?.siteTitle || "Injective Blog",
-    twitterDescription:
-        metadata.value?.siteDescription || "Stay updated with Injective",
-    twitterImage: ogImage.value,
-    twitterImageAlt: "Live preview of Injective Blog",
-});
+useSeo({ metadata: siteMetadata });
 </script>
 
 <template>
