@@ -13,13 +13,22 @@ const { data: post } = await useSanityQuery<POST_QUERYResult>(
 const serializers = {
     types: {
         youTube: (props: any) => {
-            console.log("YouTube Block Data:", JSON.stringify(props, null, 2)); // Debug
             const url = props?.url || "";
             if (!url) {
                 console.warn("YouTube block is missing a URL:", props);
                 return null;
             }
             return h(YouTube, { src: url });
+        },
+        image: (props: any) => {
+            if (!props?.url) {
+                console.warn("Image block is missing a URL:", props);
+                return null;
+            }
+            return h("img", {
+                src: props.url,
+                alt: props?.alt || "Embedded image",
+            });
         },
     },
 };

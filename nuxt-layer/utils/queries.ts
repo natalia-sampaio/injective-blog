@@ -37,7 +37,13 @@ export const POST_QUERY = groq`
     slug,
     publishedAt,
     "imageUrl": image.asset->url,
-    body
+    body[]{
+      ...,
+      _type == "image" => {
+        "url": asset->url,
+        "alt": alt
+      }
+    }
   }
 `;
 

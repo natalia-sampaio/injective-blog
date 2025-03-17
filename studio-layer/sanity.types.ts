@@ -401,7 +401,7 @@ export type POSTS_QUERYResult = Array<{
   tags: Array<string | null> | null
 }>
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{    _id,    title,    slug,    publishedAt,    "imageUrl": image.asset->url,    body  }
+// Query: *[_type == "post" && slug.current == $slug][0]{    _id,    title,    slug,    publishedAt,    "imageUrl": image.asset->url,    body[]{      ...,      _type == "image" => {        "url": asset->url,        "alt": alt      }    }  }
 export type POST_QUERYResult = {
   _id: string
   title: string | null
@@ -409,9 +409,6 @@ export type POST_QUERYResult = {
   publishedAt: string | null
   imageUrl: string | null
   body: Array<
-    | ({
-        _key: string
-      } & YouTube)
     | {
         children?: Array<{
           marks?: Array<string>
@@ -441,6 +438,13 @@ export type POST_QUERYResult = {
         crop?: SanityImageCrop
         _type: 'image'
         _key: string
+        url: string | null
+        alt: null
+      }
+    | {
+        _key: string
+        _type: 'youTube'
+        url?: string
       }
   > | null
 } | null
@@ -479,7 +483,7 @@ declare module '@sanity/client' {
     '\n  *[_type == "siteSettings"][0]\n': METADATA_QUERYResult
     '\n  *[_type == "featuredPosts"][0]{\n    featuredPosts[]->{\n      _id,\n      title,\n      slug,\n      publishedAt,\n      "imageUrl": image.asset->url,\n      body[0],\n      "tags": tags[]->title\n    }\n  }\n': HERO_QUERYResult
     '\n  *[_type == "post"]{\n    _id,\n    title,\n    slug,\n    publishedAt,\n    "imageUrl": image.asset->url,\n    body[0],\n    "tags": tags[]->title\n  }\n': POSTS_QUERYResult
-    '\n  *[_type == "post" && slug.current == $slug][0]{\n    _id,\n    title,\n    slug,\n    publishedAt,\n    "imageUrl": image.asset->url,\n    body\n  }\n': POST_QUERYResult
+    '\n  *[_type == "post" && slug.current == $slug][0]{\n    _id,\n    title,\n    slug,\n    publishedAt,\n    "imageUrl": image.asset->url,\n    body[]{\n      ...,\n      _type == "image" => {\n        "url": asset->url,\n        "alt": alt\n      }\n    }\n  }\n': POST_QUERYResult
     '\n  *[_type == "tags"]{\n    title,\n    "slug": slug.current\n  }\n': TAGS_QUERYResult
     '\n  *[_type == "footer"] | order(_updatedAt desc) [0]\n': FOOTER_QUERYResult
   }
