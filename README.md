@@ -4,6 +4,7 @@
 
 -   [Description](#description)
 -   [Tech Stack](#tech-stack)
+-   [Performance Evaluation](#performance-evaluation)
 -   [Choosing a Headless CMS](#choosing-a-headless-cms)
     1. [Defining Project Constraints](#defining-project-constraints)
     2. [Compiling Data](#compiling-data)
@@ -19,13 +20,6 @@
 ## Description
 
 Implement a mirror version of the [Injective Blog](https://blog.injective.com).
-
-### Links
-
--   [Netlify Deploy - Injective Blog](https://injective-blog.netlify.app/)
--   [Sanity Studio](https://injective-blog.sanity.studio/structure)
-
-    **Note:** needs invitation from owner for auth.
 
 ### Mandatory Features:
 
@@ -46,6 +40,67 @@ Implement a mirror version of the [Injective Blog](https://blog.injective.com).
 -   Composition API
 -   TypeScript
 -   **Deployment:** The application should be deployed to **Netlify with SSR enabled** (`ssr: true` for server-side rendering).
+
+### Links
+
+-   [Netlify Deploy - Injective Blog](https://injective-blog.netlify.app/)
+-   [Sanity Studio](https://injective-blog.sanity.studio/structure)
+
+    **Note:** needs invitation from owner for auth.
+
+## Performance Evaluation
+
+![Lighthouse Performance](https://img.shields.io/badge/performance-100-brightgreen?style=flat&logo=lighthouse)
+![Lighthouse Accessibility](https://img.shields.io/badge/accessibility-84-yellow?style=flat&logo=lighthouse)
+![Lighthouse Best Practices](https://img.shields.io/badge/best%20practices-96-brightgreen?style=flat&logo=lighthouse)
+![Lighthouse SEO](https://img.shields.io/badge/SEO-100-brightgreen?style=flat&logo=lighthouse)
+
+### Lighthouse Report Overview
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><b>My Project</b></td>
+      <td align="center"><b>Official Injective Blog</b></td>
+    </tr>
+    <tr>
+      <td><img src="./docs/lighthouse/my-project-report/lighthouse-screenshot.png" width="100%"></td>
+      <td><img src="./docs/lighthouse/official-injective-blog-report/lighthouse-screenshot.png" width="100%"></td>
+    </tr>
+    <tr>
+      <td align="center">
+        <a href="./docs/lighthouse/my-project-report/lighthouse-report.html" target="_blank">📄 View Full Report</a>
+      </td>
+      <td align="center">
+        <a href="./docs/lighthouse/official-injective-blog-report/lighthouse-report.html" target="_blank">📄 View Full Report</a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+### Key Takeaways
+
+-   **My project outperforms the official Injective Blog in all categories**, with higher scores in Performance, Accessibility, Best Practices and SEO.
+-   However, **_performance scores should not be directly compared_** due to dataset size differences:
+    -   The **official blog has significantly more posts**, leading to **larger API responses, more DOM elements, and increased rendering complexity**.
+    -   My project only has **5 blog posts**, making API calls faster and improving **First Contentful Paint (FCP) and Largest Contentful Paint (LCP)** scores.
+-   **Key optimizations contributing to my performance:**  
+    ✅ **Server-side rendering (SSR) with Nuxt.js** significantly speeds up loading times.  
+    ✅ **Sanity’s API response time** is highly efficient, minimizing delays when fetching content.
+-   **Accessibility Considerations:**
+    -   While my project has **higher accessibility score (84 vs. 78)**, there are **minor areas for improvement** that could be optimized further.
+-   **Potential improvements:**
+    Currently, images are served directly from Sanity’s CDN **without additional transformations**. By leveraging **Sanity’s Image API**, I can:
+
+    -   **Enable automatic WebP/AVIF conversion** (`auto=format`)
+    -   **Resize images dynamically** to match display size (`width=800`)
+    -   **Improve lazy loading behavior**
+
+    Example of an optimized image transformation:
+
+    ```ts
+    urlFor(post.mainImage).width(800).auto("format").url();
+    ```
 
 ## Choosing A Headless CMS
 
