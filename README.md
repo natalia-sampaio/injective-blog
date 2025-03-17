@@ -196,7 +196,7 @@ As easy as breathing. The utility-first approach makes styling quick and effortl
 
 ### Nuxt UI
 
-Nuxt UI was easy to pick up and performed well in terms of **performance, developer experience (DX), and accessibility**. However, it felt overkill for this project. A more detailed explanation can be found [here](#more-modular-component-management).
+Nuxt UI was easy to pick up and performed well in terms of **performance, developer experience (DX), and accessibility**.
 
 ### Composition API
 
@@ -228,18 +228,6 @@ Currently, the SEO metadata is dynamically generated using a composable (`useSeo
 -   **Give editors more control over social card generation** – Editors can customize SEO fields directly within the CMS, ensuring that Open Graph and Twitter card previews match their intended content without requiring developer intervention.
 
 By implementing these improvements, SEO performance, **social media visibility**, and **developer experience** will be enhanced, creating a **more streamlined approach** to metadata management in the Nuxt application.
-
-### More Modular Component Management
-
-Considering that this use case is simple and doesn’t require many different components, **Nuxt UI adds unnecessary weight**.
-
-#### Improvements
-
--   **Consider a more modular approach** – A library like **Shadcn would have been a better fit**, offering more control over which components get included.
-
--   **Build custom components where necessary** – Given the simplicity of the project, **custom Vue Components would provide greater control over styling, performance, and bundle size** without relying on a full UI library.
-
-By making the build **lighter and more tailored** to the project’s needs, future iterations can be even more **efficient and maintainable.**
 
 ## Setting Up the Project Locally
 
@@ -379,5 +367,4 @@ This project provided a great opportunity to explore **Sanity, Nuxt.js, and serv
 
 ### Challenges & Lessons Learned
 
--   **Nuxt UI felt like overkill** – A more modular component library could have been a better fit.
 -   **Netlify deployment required tweaking** – Setting the publish directory to `dist` was necessary for a successful build.
