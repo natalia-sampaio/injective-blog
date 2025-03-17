@@ -8,6 +8,7 @@
     1. [Defining Project Constraints](#defining-project-constraints)
     2. [Compiling Data](#compiling-data)
     3. [Conclusion](#conclusion)
+- [Personal Opinions](#personal-opinions)
 
 ## Description
 
@@ -37,9 +38,9 @@ Implement a mirror version of the [Injective Blog](https://blog.injective.com).
 
 When starting a new scalable project, selecting the right tools is crucial. In this case, choosing the best headless CMS is a key decision, but the market offers a vast array of options. For instance, [Jamstack site](https://jamstack.org) lists **126 different headless CMS solutions**.
 
-### 1. Defining Project Constraints
+### Defining Project Constraints
 
-Considering our tech stack—**Nuxt.js and Netlify with SSR enabled**—we can define specific constraints to guide our decision:
+Considering the tech stack—**Nuxt.js and Netlify with SSR enabled**—I can define specific constraints to guide my decision:
 
 1.  API Availability & Response Speed
 
@@ -56,9 +57,9 @@ Considering our tech stack—**Nuxt.js and Netlify with SSR enabled**—we can d
     -   Work well with **cold starts** (serverless functions can be slow).
     -   Provide **caching options** to mitigate slow dynamic fetches.
 
-3.  Support for SSG & SSR Rendering
+3.  Support for SSR Rendering
 
-    The CMS should support both SSG and SSR, as **hybrid rendering (ISR)** can improve performance. To meet this criterion, the CMS should:
+    The CMS should support SSR. To meet this criterion, the CMS should:
 
     -   Include **Nuxt.js modules or, at the very least, an integration guide**.
         -   A **Nuxt module** is preferred over just a guide, as it provides built-in optimizations, auto-imports, and SSR-friendly features.
@@ -72,10 +73,10 @@ Considering our tech stack—**Nuxt.js and Netlify with SSR enabled**—we can d
     -   Deliver **structured content** (e.g., blog posts, categories).
     -   Support **image optimization** via a built-in API.
 
-### 2. Compiling Data
+### Compiling Data
 
-We identified the **top 5 headless CMS platforms** based on [G2's ratings](https://www.g2.com/categories/headless-cms), sorted by **number of reviews (most to least)**.  
-We also considered the **ease to use score** from [G2'S **Top 20 Easiest To Use Headless CMS Software**](https://www.g2.com/categories/headless-cms?rank=3&tab=easiest_to_use).
+I identified the **top 5 headless CMS platforms** based on [G2's ratings](https://www.g2.com/categories/headless-cms), sorted by **number of reviews (most to least)**.  
+I also considered the **ease to use score** from [G2'S **Top 20 Easiest To Use Headless CMS Software**](https://www.g2.com/categories/headless-cms?rank=3&tab=easiest_to_use).
 
 The table below presents these platforms, incorporating our defined constraints:
 
@@ -87,7 +88,7 @@ The table below presents these platforms, incorporating our defined constraints:
 | **Storyblok** | ✅ Built-in caching and CDN         | ✅ Yes              | ✅ Yes            | Nuxt.js module       | ✅ Yes   | ✅ Yes               | ✅ Yes             | ⭐ **4.5 / 5** (**458 reviews**)         | **8.9 (#1 place)**              |
 | **Prismic**   | ✅ Built-in caching and CDN         | ✅ Yes              | ✅ Yes            | Nuxt.js module       | ✅ Yes   | ✅ Yes               | ✅ Yes             | ⭐ **4.3 / 5** (**303 reviews**)         | **8.6 (#5 place)**              |
 
-### 3. Conclusion
+### Conclusion
 
 **After defining our project constraints and evaluating the top headless CMS options, [Sanity](https://www.sanity.io/) emerges as the best choice.**
 
@@ -113,41 +114,36 @@ The table below presents these platforms, incorporating our defined constraints:
 
 ## Personal Opinions
 
--   Sanity:
+### Sanity
+Learning Sanity was a smooth experience. There’s plenty of good documentation, and I never felt stuck.The most challenging part was embedding a YouTube video within the body of a post, but overall, it was an intuitive platform to work with.
 
-        Learning Sanity was a smooth experience. There’s plenty of good documentation, and I never felt stuck. The most challenging part was embedding a YouTube video within the body of a post, but overall, it was an intuitive platform to work with.
+### Nuxt.js
+Straightforward and fast. It made development efficient without unnecessary complexity.
 
--   Nuxt.js:
+### Tailwind CSS
+As easy as breathing. The utility-first approach makes styling quick and effortless.
 
-        Straightforward and fast. It made development efficient without unnecessary complexity.
+### Nuxt UI
 
--   Tailwind CSS:
+While Nuxt UI was easy to pick up and performed well in terms of speed and accessibility, I feel it was overkill for this project.
 
-        As easy as breathing. The utility-first approach makes styling quick and effortless.
+The application is simple and doesn’t require many different components, making Nuxt UI add unnecessary weight. In hindsight, I would have preferred something more modular, like shadcn, for better control over what gets included.
 
--   Nuxt UI:
+That said, given the project's simplicity, I would also be comfortable building my own components, as this would provide full control over styling, performance, and bundle size without relying on a UI library.
 
-        While Nuxt UI was easy to pick up and performed well in terms of speed and accessibility, I feel it was overkill for this project.
+### Composition API
+Very easy, especially since I’m already used to it. It feels natural to work with.
 
-        The application is simple and doesn’t require many different components, making Nuxt UI add unnecessary weight. In hindsight, I would have preferred something more modular, like shadcn, for better control over what gets included.
+### TypeScript
+No issues at all. I’m very familiar with it, so using it was seamless.
 
-        That said, given the project's simplicity, I would also be comfortable building my own components, as this would provide full control over styling, performance, and bundle size without relying on a UI library.
+### Netlify
 
--   Composition API:
+Working with Netlify was a bit tricky at first, but after overcoming some initial hurdles, I now feel confident using the platform.
 
-        Very easy, especially since I’m already used to it. It feels natural to work with.
+One of the main challenges I faced was with the publish directory—I initially left it unset, assuming Netlify would automatically resolve it to .output, Nuxt's default build folder.
 
--   TypeScript:
-
-        No issues at all. I’m very familiar with it, so using it was seamless.
-
--   Netlify:
-
-        Working with Netlify was a bit tricky at first, but after overcoming some initial hurdles, I now feel confident using the platform.
-
-        One of the main challenges I faced was with the publish directory—I initially left it unset, assuming Netlify would automatically resolve it to .output, Nuxt's default build folder.
-
-        However, Netlify requires this to be explicitly set to dist for the deployment to work correctly. Once I made that adjustment, the JavaScript files loaded properly in production.
+However, Netlify requires this to be explicitly set to dist for the deployment to work correctly. Once I made that adjustment, the JavaScript files loaded properly in production.
 
 ---
 
