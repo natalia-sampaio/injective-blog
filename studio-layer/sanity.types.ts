@@ -174,7 +174,7 @@ export type Post = {
     crop?: SanityImageCrop
     _type: 'image'
   }
-  blockContent?: Array<
+  body?: Array<
     | {
         children?: Array<{
           marks?: Array<string>
@@ -333,7 +333,41 @@ export type HERO_QUERYResult = {
     slug: Slug | null
     publishedAt: string | null
     imageUrl: string | null
-    body: null
+    body:
+      | ({
+          _key: string
+        } & YouTube)
+      | {
+          children?: Array<{
+            marks?: Array<string>
+            text?: string
+            _type: 'span'
+            _key: string
+          }>
+          style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+          listItem?: 'bullet' | 'number'
+          markDefs?: Array<{
+            href?: string
+            _type: 'link'
+            _key: string
+          }>
+          level?: number
+          _type: 'block'
+          _key: string
+        }
+      | {
+          asset?: {
+            _ref: string
+            _type: 'reference'
+            _weak?: boolean
+            [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+          }
+          hotspot?: SanityImageHotspot
+          crop?: SanityImageCrop
+          _type: 'image'
+          _key: string
+        }
+      | null
     tags: Array<string | null> | null
   }> | null
 } | null
@@ -345,7 +379,41 @@ export type POSTS_QUERYResult = Array<{
   slug: Slug | null
   publishedAt: string | null
   imageUrl: string | null
-  body: null
+  body:
+    | ({
+        _key: string
+      } & YouTube)
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+    | null
   tags: Array<string | null> | null
 }>
 // Variable: POST_QUERY
@@ -356,7 +424,41 @@ export type POST_QUERYResult = {
   slug: Slug | null
   publishedAt: string | null
   imageUrl: string | null
-  body: null
+  body: Array<
+    | ({
+        _key: string
+      } & YouTube)
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?: 'blockquote' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'normal'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+  > | null
 } | null
 // Variable: TAGS_QUERY
 // Query: *[_type == "tags"]{    title,    "slug": slug.current  }

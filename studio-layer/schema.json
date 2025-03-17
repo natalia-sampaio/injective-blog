@@ -919,7 +919,7 @@
         },
         "optional": true
       },
-      "blockContent": {
+      "body": {
         "type": "objectAttribute",
         "value": {
           "type": "array",
