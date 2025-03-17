@@ -36,13 +36,16 @@ jobs:
             - name: Generate Sanity Type Definitions
               run: npm run typegen
 
+            - name: Clean Old Build
+              run: rm -rf dist
+
             - name: Build Sanity Studio
               run: npm run build
 
             - name: Deploy Sanity Studio
               env:
                   SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
-              run: npx sanity deploy --dataset production --hostname injective-blog --yes
+              run: npx sanity deploy --dataset production --yes
 
             - name: Notify on Success
               if: success()
