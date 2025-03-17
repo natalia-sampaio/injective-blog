@@ -113,19 +113,41 @@ The table below presents these platforms, incorporating our defined constraints:
 
 ## Personal Opinions
 
--   Sanity: Learning Sanity was a smooth experience. There’s plenty of good documentation, and I never felt stuck. The most challenging part was embedding a YouTube video within the body of a post, but overall, it was an intuitive platform to work with.
+-   Sanity:
 
--   Nuxt.js: Straightforward and fast. It made development efficient without unnecessary complexity.
+        Learning Sanity was a smooth experience. There’s plenty of good documentation, and I never felt stuck. The most challenging part was embedding a YouTube video within the body of a post, but overall, it was an intuitive platform to work with.
 
--   Tailwind CSS: As easy as breathing. The utility-first approach makes styling quick and effortless.
+-   Nuxt.js:
 
--   Nuxt UI: While it was easy to pick up and performed well in terms of speed and accessibility, I feel it was overkill for this project. The application is simple and doesn’t require many different components, making Nuxt UI add unnecessary weight. In hindsight, I would have preferred something more modular, like shadcn, for better control over what gets included.
+        Straightforward and fast. It made development efficient without unnecessary complexity.
 
--   Composition API: Very easy, especially since I’m already used to it. It feels natural to work with.
+-   Tailwind CSS:
 
--   TypeScript: No issues at all. I’m very familiar with it, so using it was seamless.
+        As easy as breathing. The utility-first approach makes styling quick and effortless.
 
--   Netlify: Working with Netlify was a bit tricky at first, but after overcoming some initial hurdles, I now feel confident using the platform. One of the main challenges I faced was with the publish directory—I initially left it unset, assuming Netlify would automatically resolve it to `.output`, Nuxt's default build folder. However, Netlify requires this to be explicitly set to `dist` for the deployment to work correctly. Once I made that adjustment, the JavaScript files loaded properly in production.
+-   Nuxt UI:
+
+        While Nuxt UI was easy to pick up and performed well in terms of speed and accessibility, I feel it was overkill for this project.
+
+        The application is simple and doesn’t require many different components, making Nuxt UI add unnecessary weight. In hindsight, I would have preferred something more modular, like shadcn, for better control over what gets included.
+
+        That said, given the project's simplicity, I would also be comfortable building my own components, as this would provide full control over styling, performance, and bundle size without relying on a UI library.
+
+-   Composition API:
+
+        Very easy, especially since I’m already used to it. It feels natural to work with.
+
+-   TypeScript:
+
+        No issues at all. I’m very familiar with it, so using it was seamless.
+
+-   Netlify:
+
+        Working with Netlify was a bit tricky at first, but after overcoming some initial hurdles, I now feel confident using the platform.
+
+        One of the main challenges I faced was with the publish directory—I initially left it unset, assuming Netlify would automatically resolve it to .output, Nuxt's default build folder.
+
+        However, Netlify requires this to be explicitly set to dist for the deployment to work correctly. Once I made that adjustment, the JavaScript files loaded properly in production.
 
 ---
 
