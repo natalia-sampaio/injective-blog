@@ -46,14 +46,25 @@ const ogImage = computed(
 );
 
 useSeoMeta({
+    link: { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
     title: metadata.value?.siteTitle || "Injective Blog",
-    ogTitle: metadata.value?.siteTitle || "Injective Blog",
     description:
         metadata.value?.siteDescription || "Stay updated with Injective",
+    ogTitle: metadata.value?.siteTitle || "Injective Blog",
     ogDescription:
         metadata.value?.siteDescription || "Stay updated with Injective",
-    ogImage: metadata.value?.sitePreview || ogImage.value,
-    twitterCard: metadata.value?.sitePreview,
+    ogImage: ogImage.value,
+    ogImageType: "image/jpeg",
+    ogImageWidth: "1200",
+    ogImageHeight: "630",
+    ogUrl: "https://injective-blog.netlify.app",
+    ogType: "website",
+    twitterCard: "summary_large_image",
+    twitterTitle: metadata.value?.siteTitle || "Injective Blog",
+    twitterDescription:
+        metadata.value?.siteDescription || "Stay updated with Injective",
+    twitterImage: ogImage.value,
+    twitterImageAlt: "Live preview of Injective Blog",
 });
 </script>
 
