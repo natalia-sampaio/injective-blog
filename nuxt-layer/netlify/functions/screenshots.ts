@@ -11,9 +11,10 @@ export default async function handler(event: any) {
 
         console.log(`🌍 Capturing screenshot for ${url}`);
 
-        // 🚀 Launch Playwright
+        // 🚀 Launch Playwright using `chromium.headless_shell`
         const browser = await chromium.launch({
-            headless: true, // Fully headless
+            executablePath: "/usr/bin/chromium", // Netlify’s Chromium location
+            headless: true,
         });
 
         const page = await browser.newPage();
