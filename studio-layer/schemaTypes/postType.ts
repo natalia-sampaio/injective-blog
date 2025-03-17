@@ -13,6 +13,7 @@ export const postType = defineType({
     defineField({
       name: 'slug',
       type: 'slug',
+      description: 'Click "Generate" to create a slug. Editing manually is not recommended.',
       options: {source: 'title'},
       validation: (rule) => rule.required(),
     }),
@@ -36,6 +37,9 @@ export const postType = defineType({
         }),
         defineArrayMember({
           type: 'youTube',
+        }),
+        defineArrayMember({
+          type: 'image',
         }),
       ],
     }),
