@@ -10,12 +10,22 @@
     3. [Conclusion](#conclusion)
 -   [Personal Opinions](#personal-opinions)
 -   [Room for Improvement](#room-for-improvement)
--   [Run Project Locally](#running-the-project-locally)
+-   [Local Set Up](#setting-up-the-project-locally)
 -   [Troubleshooting](#troubleshooting)
+-   [Final Thoughts](#final-thoughts)
+    -   [What went well?](#what-went-well)
+    -   [Challenges & Lessons](#challenges--lessons-learned)
 
 ## Description
 
 Implement a mirror version of the [Injective Blog](https://blog.injective.com).
+
+### Links
+
+-   [Netlify Deploy - Injective Blog](https://injective-blog.netlify.app/)
+-   [Sanity Studio](https://injective-blog.sanity.studio/structure)
+
+    **Note:** needs invitation from owner for auth.
 
 ### Mandatory Features:
 
@@ -176,7 +186,7 @@ Considering that this use case is simple and doesn’t require many different co
 
 By making the build **lighter and more tailored** to the project’s needs, future iterations can be even more **efficient and maintainable.**
 
-## Running the Project Locally
+## Setting Up the Project Locally
 
 To run the project locally, follow these steps:
 
@@ -301,3 +311,18 @@ If the Nuxt app is not fetching data correctly:
     **Note:** If you create new schemas, make sure to add them to `schemaTypes/index.ts`
 
 -   If dependencies are missing, try running `npm install` again inside each directory.
+
+## Final Thoughts
+
+This project provided a great opportunity to explore **Sanity, Nuxt.js, and server-side rendering (SSR) with Netlify**. Through testing and evaluation, **Sanity emerged as the best CMS choice**, offering **scalability, strong developer support, and real-time API performance.**
+
+### What Went Well?
+
+-   **Sanity** – Easy learning curve with solid documentation.
+-   **Nuxt.js** – Fast and efficient development experience.
+-   **Tailwind CSS** – Simple, clean styling with a utility-first approach.
+
+### Challenges & Lessons Learned
+
+-   **Nuxt UI felt like overkill** – A more modular component library could have been a better fit.
+-   **Netlify deployment required tweaking** – Setting the publish directory to `dist` was necessary for a successful build.
