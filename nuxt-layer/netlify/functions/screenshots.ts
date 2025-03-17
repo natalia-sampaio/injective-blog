@@ -2,33 +2,41 @@ import puppeteer from "puppeteer-core";
 import chrome from "@sparticuz/chromium";
 
 export default async function handler(event: any) {
+    console.log("🚀 Function started!");
+
     try {
-        const queryParams = new URL(event.rawUrl).searchParams;
-        const url =
-            queryParams.get("url") || "https://injective-blog.netlify.app";
-        const width = parseInt(queryParams.get("width") || "1200", 10);
-        const height = parseInt(queryParams.get("height") || "630", 10);
-        const format = queryParams.get("format") || "jpeg"; // jpeg, png, webp
+        // 🔹 Hardcoded URL
+        const urlParam = "https://injective-blog.netlify.app";
+        console.log("🌍 Using Hardcoded URL:", urlParam);
 
-        console.log(`📸 Generating screenshot for: ${url}`);
+        const width = 1200;
+        const height = 630;
+        const format = "jpeg"; // Supports jpeg, png, webp
 
+        console.log(
+            `📸 Generating screenshot for: ${urlParam} | ${width}x${height} | ${format}`
+        );
+
+        // 🚀 Launch Puppeteer
         const browser = await puppeteer.launch({
             args: chrome.args,
             executablePath: await chrome.executablePath(),
             headless: chrome.headless,
         });
 
+        console.log("✅ Puppeteer Launched!");
         const page = await browser.newPage();
         await page.setViewport({ width, height });
 
-        await page.goto(url, { waitUntil: "domcontentloaded" });
+        console.log(`🔄 Navigating to ${urlParam}...`);
+        await page.goto(urlParam, { waitUntil: "domcontentloaded" });
 
-        // Generate screenshot
+        console.log("📷 Taking Screenshot...");
         const screenshot = await page.screenshot({ type: format });
 
         await browser.close();
+        console.log("✅ Screenshot Taken Successfully!");
 
-        // ✅ Return a proper Response object (Fix for Netlify)
         return new Response(screenshot, {
             headers: {
                 "Content-Type": `image/${format}`,
@@ -36,10 +44,12 @@ export default async function handler(event: any) {
             },
         });
     } catch (error) {
-        console.error("❌ Error generating OG image:", error);
+        console.error("❌ ERROR: ", error);
 
         return new Response(
-            JSON.stringify({ error: "Failed to generate screenshot" }),
+            JSON.stringify({
+                error: `Failed to generate screenshot: ${error.message}`,
+            }),
             {
                 status: 500,
                 headers: { "Content-Type": "application/json" },

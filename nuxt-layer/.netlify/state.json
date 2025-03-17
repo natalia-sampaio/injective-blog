@@ -1,0 +1,20 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Florianópolis",
+			"country": {
+				"code": "BR",
+				"name": "Brazil"
+			},
+			"subdivision": {
+				"code": "SC",
+				"name": "Santa Catarina"
+			},
+			"timezone": "America/Sao_Paulo",
+			"latitude": -27.6168,
+			"longitude": -48.4997,
+			"postalCode": "88000"
+		},
+		"timestamp": 1742171755201
+	}
+}
