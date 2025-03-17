@@ -40,6 +40,17 @@ const filteredPosts = (label: string | undefined) => {
     if (label === "All Posts") return posts.value;
     return posts.value.filter((post) => post.tags?.includes(label)) || [];
 };
+
+useSeoMeta({
+    title: metadata.value?.siteTitle || "Injective Blog",
+    ogTitle: metadata.value?.siteTitle || "Injective Blog",
+    description:
+        metadata.value?.siteDescription || "Stay updated with Injective",
+    ogDescription:
+        metadata.value?.siteDescription || "Stay updated with Injective",
+    ogImage: metadata.value?.sitePreview || "/default-image.png",
+    twitterCard: metadata.value?.sitePreview,
+});
 </script>
 
 <template>
