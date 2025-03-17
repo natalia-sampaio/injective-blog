@@ -8,7 +8,10 @@
     1. [Defining Project Constraints](#defining-project-constraints)
     2. [Compiling Data](#compiling-data)
     3. [Conclusion](#conclusion)
-- [Personal Opinions](#personal-opinions)
+-   [Personal Opinions](#personal-opinions)
+-   [Room for Improvement](#room-for-improvement)
+-   [Run Project Locally](#running-the-project-locally)
+-   [Troubleshooting](#troubleshooting)
 
 ## Description
 
@@ -76,7 +79,7 @@ Considering the tech stack—**Nuxt.js and Netlify with SSR enabled**—I can de
 ### Compiling Data
 
 I identified the **top 5 headless CMS platforms** based on [G2's ratings](https://www.g2.com/categories/headless-cms), sorted by **number of reviews (most to least)**.  
-I also considered the **ease to use score** from [G2'S **Top 20 Easiest To Use Headless CMS Software**](https://www.g2.com/categories/headless-cms?rank=3&tab=easiest_to_use).
+I also considered the **ease of use score** from [G2'S **Top 20 Easiest To Use Headless CMS Software**](https://www.g2.com/categories/headless-cms?rank=3&tab=easiest_to_use).
 
 The table below presents these platforms, incorporating our defined constraints:
 
@@ -115,26 +118,27 @@ The table below presents these platforms, incorporating our defined constraints:
 ## Personal Opinions
 
 ### Sanity
+
 Learning Sanity was a smooth experience. There’s plenty of good documentation, and I never felt stuck.The most challenging part was embedding a YouTube video within the body of a post, but overall, it was an intuitive platform to work with.
 
 ### Nuxt.js
+
 Straightforward and fast. It made development efficient without unnecessary complexity.
 
 ### Tailwind CSS
+
 As easy as breathing. The utility-first approach makes styling quick and effortless.
 
 ### Nuxt UI
 
-While Nuxt UI was easy to pick up and performed well in terms of speed and accessibility, I feel it was overkill for this project.
-
-The application is simple and doesn’t require many different components, making Nuxt UI add unnecessary weight. In hindsight, I would have preferred something more modular, like shadcn, for better control over what gets included.
-
-That said, given the project's simplicity, I would also be comfortable building my own components, as this would provide full control over styling, performance, and bundle size without relying on a UI library.
+Nuxt UI was easy to pick up and performed well in terms of **performance, developer experience (DX), and accessibility**. However, it felt overkill for this project. A more detailed explanation can be found [here](#more-modular-component-management).
 
 ### Composition API
+
 Very easy, especially since I’m already used to it. It feels natural to work with.
 
 ### TypeScript
+
 No issues at all. I’m very familiar with it, so using it was seamless.
 
 ### Netlify
@@ -145,80 +149,155 @@ One of the main challenges I faced was with the publish directory—I initially 
 
 However, Netlify requires this to be explicitly set to dist for the deployment to work correctly. Once I made that adjustment, the JavaScript files loaded properly in production.
 
----
+## Room for Improvement
 
-## Nuxt Minimal Starter
+### SEO Metadata Generation
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Currently, the SEO metadata is dynamically generated using a composable (`useSeo`) that pulls data from each Nuxt page. While this approach works well, there's room for improvement to make it even more consistent, scalable, and editor-friendly.
 
-## Setup
+#### Improvements
 
-Make sure to install dependencies:
+-   **Extract SEO content directly from the CMS** – Instead of manually defining metadata within each Nuxt page, the composable should automatically pull SEO-specific fields (meta title, description, and image) from the CMS.
+-   **Ensure consistency across the entire application** – Centralizing SEO metadata ensures all pages follow the same structure, reducing redundancy and improving maintainability.
+-   **Simplify the `useSeo` composable** – With metadata being sourced directly from the post, the composable will require less manual configuration, making it more lightweight and efficient.
+-   **Give editors more control over social card generation** – Editors can customize SEO fields directly within the CMS, ensuring that Open Graph and Twitter card previews match their intended content without requiring developer intervention.
 
-```bash
-# npm
-npm install
+By implementing these improvements, SEO performance, **social media visibility**, and **developer experience** will be enhanced, creating a **more streamlined approach** to metadata management in the Nuxt application.
 
-# pnpm
-pnpm install
+### More Modular Component Management
 
-# yarn
-yarn install
+Considering that this use case is simple and doesn’t require many different components, **Nuxt UI adds unnecessary weight**.
 
-# bun
-bun install
+#### Improvements
+
+-   **Consider a more modular approach** – A library like **Shadcn would have been a better fit**, offering more control over which components get included.
+
+-   **Build custom components where necessary** – Given the simplicity of the project, **custom Vue Components would provide greater control over styling, performance, and bundle size** without relying on a full UI library.
+
+By making the build **lighter and more tailored** to the project’s needs, future iterations can be even more **efficient and maintainable.**
+
+## Running the Project Locally
+
+To run the project locally, follow these steps:
+
+### Prerequisites
+
+Ensure you have the following installed on your system:
+
+-   **Node.js** (Latest LTS recommended)
+-   **npm** or **pnpm** (Preferred package manager for the project)
+-   **Sanity CLI** (For managing the CMS studio)
+
+```sh
+npm install -g @sanity/cli
 ```
 
-## Development Server
+### Clone the Repository
 
-Start the development server on `http://localhost:3000`:
+```sh
+git clone git@github.com:natalia-sampaio/injective-blog.git
+cd injective-blog
+```
 
-```bash
-# npm
+### Install Dependencies
+
+Navigate to both the Nuxt app and Sanity studio
+directories to install dependencies.
+
+#### Nuxt Layer (Frontend)
+
+```sh
+cd nuxt-layer
+npm install  # or pnpm install
+```
+
+#### Studio Layer (Sanity CMS)
+
+```sh
+cd ../studio-layer
+npm install  # or pnpm install
+```
+
+#### Run the Project Locally
+
+##### Start the Sanity Studio
+
+Sanity Studio is the CMS backend where content is managed. You need to run it before launching the Nuxt frontend.
+
+```sh
+cd studio-layer
 npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+        This will start Sanity Studio at http://localhost:3333/.
 
-Build the application for production:
+##### Start the Nuxt App
 
-```bash
-# npm
+Once Sanity Studio is running, open a new terminal and start the Nuxt application.
+
+```sh
+cd nuxt-layer
+npm run dev
+```
+
+        This will start the Nuxt app at http://localhost:3000/.
+
+#### Build and Preview (Optional)
+
+##### Run the Production Build
+
+```sh
+cd nuxt-layer
 npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
 npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+        The preview will run the optimized production build locally.
+
+#### Deploying (Optional)
+
+##### Deploy Sanity Studio
+
+To deploy your CMS to Sanity's hosting:
+
+```sh
+cd studio-layer
+npm run deploy
+```
+
+## Troubleshooting
+
+If the Nuxt app is not fetching data correctly:
+
+-   Ensure **Sanity Studio is running** (`npm run dev` in `studio-layer`).
+
+-   Check if the **Sanity dataset and project ID** are correctly configured in the Nuxt environment.
+
+    ```sh
+    // nuxt-layer/nuxt.config.ts
+
+    export default defineNuxtConfig({
+        compatibilityDate: "2024-11-01",
+        modules: ["@nuxtjs/sanity"],
+        sanity: {
+            projectId: SANITY_PROJECT_ID,
+            dataset: SANITY_DATASET,
+        },
+    });
+    ```
+
+-   **Schema or Query Updates Not Reflecting in the Nuxt App**
+
+    If you modify **schemas (`studio-layer/schemaTypes`)** or **queries (`nuxt-layer/utils/queries.ts`)**, you need to **regenerate the types** before rebuilding and deploying:
+
+    ```sh
+    cd studio-layer
+    npm run schema
+    npm run typegen
+    npm run build
+    npm run deploy
+    ```
+
+    **Note:** If you create new schemas, make sure to add them to `schemaTypes/index.ts`
+
+-   If dependencies are missing, try running `npm install` again inside each directory.
