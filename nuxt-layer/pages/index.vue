@@ -41,6 +41,10 @@ const filteredPosts = (label: string | undefined) => {
     return posts.value.filter((post) => post.tags?.includes(label)) || [];
 };
 
+const ogImage = computed(
+    () => `https://injective-blog.netlify.app/.netlify/functions/screenshots`
+);
+
 useSeoMeta({
     title: metadata.value?.siteTitle || "Injective Blog",
     ogTitle: metadata.value?.siteTitle || "Injective Blog",
@@ -48,7 +52,7 @@ useSeoMeta({
         metadata.value?.siteDescription || "Stay updated with Injective",
     ogDescription:
         metadata.value?.siteDescription || "Stay updated with Injective",
-    ogImage: metadata.value?.sitePreview || "/default-image.png",
+    ogImage: metadata.value?.sitePreview || ogImage.value,
     twitterCard: metadata.value?.sitePreview,
 });
 </script>
