@@ -1,35 +1,26 @@
-import puppeteer from "puppeteer-core";
-import chrome from "@sparticuz/chromium";
+import { chromium } from "playwright";
 
 export default async function handler(event: any) {
-    console.log("🚀 Function started!");
+    console.log("🚀 Playwright function started!");
 
     try {
-        // 🔹 Hardcoded URL
-        const urlParam = "https://injective-blog.netlify.app";
-        console.log("🌍 Using Hardcoded URL:", urlParam);
-
+        const url = "https://injective-blog.netlify.app";
         const width = 1200;
         const height = 630;
-        const format = "jpeg"; // Supports jpeg, png, webp
+        const format = "jpeg";
 
-        console.log(
-            `📸 Generating screenshot for: ${urlParam} | ${width}x${height} | ${format}`
-        );
+        console.log(`🌍 Capturing screenshot for ${url}`);
 
-        // 🚀 Launch Puppeteer
-        const browser = await puppeteer.launch({
-            args: chrome.args,
-            executablePath: await chrome.executablePath(),
-            headless: chrome.headless,
+        // 🚀 Launch Playwright
+        const browser = await chromium.launch({
+            headless: true, // Fully headless
         });
 
-        console.log("✅ Puppeteer Launched!");
         const page = await browser.newPage();
-        await page.setViewport({ width, height });
+        await page.setViewportSize({ width, height });
 
-        console.log(`🔄 Navigating to ${urlParam}...`);
-        await page.goto(urlParam, { waitUntil: "domcontentloaded" });
+        console.log(`🔄 Navigating to ${url}...`);
+        await page.goto(url, { waitUntil: "domcontentloaded" });
 
         console.log("📷 Taking Screenshot...");
         const screenshot = await page.screenshot({ type: format });
