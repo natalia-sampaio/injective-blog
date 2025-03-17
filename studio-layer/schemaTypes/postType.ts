@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export const postType = defineType({
   name: 'post',
@@ -27,9 +27,17 @@ export const postType = defineType({
       type: 'image',
     }),
     defineField({
-      name: 'body',
+      name: 'blockContent',
       type: 'array',
-      of: [{type: 'block'}],
+      title: 'Body',
+      of: [
+        defineArrayMember({
+          type: 'block',
+        }),
+        defineArrayMember({
+          type: 'youTube',
+        }),
+      ],
     }),
     defineField({
       name: 'tags',
