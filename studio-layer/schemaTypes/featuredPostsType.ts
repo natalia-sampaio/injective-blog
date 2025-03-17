@@ -8,6 +8,8 @@ export const featuredPostsType = defineType({
     defineField({
       name: 'featuredPosts',
       title: 'Featured Posts',
+      description:
+        'Allows editors to showcase four key articles in the hero section of the blog. The order of the posts in the document determines their placement on the page, meaning the first post will always be the main feature, and the next three will be positioned as supporting posts.',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'post'}]}],
       validation: (rule) => rule.required().min(4).max(4),

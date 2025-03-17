@@ -9,7 +9,8 @@ export const footerType = defineType({
       name: 'linkGroups',
       title: 'Footer Link Groups',
       type: 'array',
-      description: 'Groups of links displayed in the footer.',
+      description:
+        'Organize and display Groups of Links in the footer. The order of the groups determines their position from left to right on the page.',
       of: [
         {
           type: 'object',
@@ -23,6 +24,8 @@ export const footerType = defineType({
             defineField({
               name: 'links',
               title: 'Links',
+              description:
+                'Links within this group. Their order determines how they appear from top to bottom on the page.',
               type: 'array',
               of: [
                 {
