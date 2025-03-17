@@ -119,7 +119,7 @@ The table below presents these platforms, incorporating our defined constraints:
 
 -   Tailwind CSS: As easy as breathing. The utility-first approach makes styling quick and effortless.
 
--   Nuxt UI: This was my first time using Nuxt UI, and it was easy to pick up. It’s fast, has great performance, and provides solid accessibility features.
+-   Nuxt UI: While it was easy to pick up and performed well in terms of speed and accessibility, I feel it was overkill for this project. The application is simple and doesn’t require many different components, making Nuxt UI add unnecessary weight. In hindsight, I would have preferred something more modular, like shadcn, for better control over what gets included.
 
 -   Composition API: Very easy, especially since I’m already used to it. It feels natural to work with.
 
