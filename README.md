@@ -9,6 +9,7 @@
     1. [Defining Project Constraints](#defining-project-constraints)
     2. [Compiling Data](#compiling-data)
     3. [Conclusion](#conclusion)
+- [Internationalization](#internationalization)
 -   [Personal Opinions](#personal-opinions)
 -   [Room for Improvement](#room-for-improvement)
 -   [Local Set Up](#setting-up-the-project-locally)
@@ -179,6 +180,73 @@ The table below presents these platforms, incorporating our defined constraints:
 -   Built-in support for **structured content, SEO metadata, and image optimization**.
 -   **Webhooks available**, allowing seamless content updates.
 -   A wealth of **official documentation** makes it easy to learn, integrate and upgrade.
+
+## Internationalization
+
+This project initially **did not prioritize internationalization**, and as a result, **its influence on the data structure was not considered from the beginning**. This was a *design flaw**, as localization affects how documents are structured, referenced, and queried.
+
+To **properly integrate internationalization**, I should have structured the blog’s content following [Sanity’s best practices for Localization](https://www.sanity.io/docs/localization), ensuring a **clean, scalable, and easy-to-maintain approach**.
+
+### Sanity Best Practices for Localization
+Sanity provides **two main localization strategies**:
+- Document-Level Localization (Separate documents per language)
+    - Best for blog posts where each version needs independent publishing.
+    - Ideal for Portable Text content (rich text blocks).
+    - Allows different formatting, links, and images per language.
+
+- Field-Level Localization (One document, multiple language fields)
+    - Best for metadata, SEO fields, and reusable structured data (e.g., tags).
+    - Ensures simpler queries and better maintainability.
+    - Used when translations always exist together and should not be independently published.
+
+For this project I would use a **mix both strategies** based on the content type.
+
+### Choosing the Right Localization Method
+
+#### Blog Posts → Document-Level Localization
+- Each post is a **standalone entity** in a specific language.
+- **Publishing schedules, formatting, and links may differ** per language.
+- Allows **independent SEO optimizations**.
+- A reference field links **translated versions together** for easier navigation.
+
+**Why?** Since blog posts are **content-heavy and independently published**, a document-level approach is the best fit.
+
+#### Tags → Field-Level Localization
+- Tags are **simple structured data** that do not require **independent publishing**.
+- Keeping translations **within a single document** simplifies maintenance.
+- Queries remain **efficient**, dynamically selecting the correct language version.
+
+**Why?** Since tags are **metadata** with the **same meaning across languages**, field-level localization is more appropriate.
+
+#### Featured Posts → Field-Level Localization (Separate Arrays per Language)
+- A **single document** manages featured posts for all languages.
+- Editors can **view and update all language versions in one place**.
+- Prevents **inconsistencies between featured content across languages**.
+
+**Why?** Featured posts are **curated selections of existing content**, making **field-level localization with separate arrays per language** the best approach.
+
+#### Site Settings (Metadata & SEO) → Field-Level Localization
+- **Global metadata** like site title, meta descriptions, and SEO settings should be stored in **a single document**.
+- Using **field-level localization** ensures metadata can be updated **without duplicating documents**.
+- Queries remain **simple and efficient**, retrieving the correct language dynamically.
+
+**Why?** Site metadata is **global** and does not require **independent publishing**, so a **single settings document with localized fields** is the best approach.
+
+#### Footer → Field-Level Localization
+- Contains **static, global content** (e.g., contact info, social links, copyright).
+- Field-level localization allows **different text versions** for each language in **a single document**.
+- Maintains **consistency in layout and design across languages**.
+
+**Why?** Since the footer is **not content-heavy and does not require independent publishing**, **field-level localization** keeps it manageable and efficient.
+
+### How to Implement These Changes
+Since **internationalization was not originally considered**, and **backward compatibility would impact delivery time**, here’s the best approach to integration:
+
+1. **Update schemas** while ensuring to maintain legacy schema types.
+2. **Update frontend queries** to retrieve the correct language-specific content.
+3. **Ensure proper translation links** between documents.
+4. **Deploy the updated schema** and **test in Sanity Studio** before pushing to production.
+
 
 ## Personal Opinions
 
