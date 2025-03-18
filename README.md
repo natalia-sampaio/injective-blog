@@ -44,7 +44,7 @@ Implement a mirror version of the [Injective Blog](https://blog.injective.com).
 ### Links
 
 -   [Netlify Deploy - Injective Blog](https://injective-blog.netlify.app/)
--   [Sanity Studio](https://injective-blog.sanity.studio/structure)
+-   [Sanity Studio](https://injective.sanity.studio/structure)
 
     **Note:** needs invitation from owner for auth.
 
