@@ -436,3 +436,4 @@ This project provided a great opportunity to explore **Sanity, Nuxt.js, and serv
 ### Challenges & Lessons Learned
 
 -   **Netlify deployment required tweaking** – Setting the publish directory to `dist` was necessary for a successful build.
+-   **Not considering internationalization from the start was a design flaw** – The original data structure did not account for multilingual content, requiring significant refactoring to support localization properly. Future projects should plan for internationalization early to avoid breaking changes and backward compatibility issues.
